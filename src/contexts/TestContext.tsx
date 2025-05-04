@@ -99,14 +99,14 @@ export const TestProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return Math.random().toString(36).substring(2, 8).toUpperCase();
   };
 
-  const createTest = (testData: Omit<Test, 'id' | 'code'>) => {
+  const createTest = (testData: Omit<Test, 'id' | 'code'>): Test => {
     const newTest: Test = {
       ...testData,
       id: Math.random().toString(36).substring(2, 9),
       code: generateTestCode(),
     };
     
-    setTests([...tests, newTest]);
+    setTests(prevTests => [...prevTests, newTest]);
     
     toast({
       title: "Test Created",

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@/components/Layout';
@@ -102,7 +103,7 @@ const CreateTest: React.FC = () => {
       return;
     }
     
-    // Create test
+    // Create test - Fix: Store the returned test object
     const newTest = createTest({
       name: testName,
       startTime,
@@ -112,6 +113,7 @@ const CreateTest: React.FC = () => {
       createdBy: 'admin',
     });
     
+    // Display test code in toast
     toast({
       title: "Test Created Successfully",
       description: `Test code: ${newTest.code}`,
@@ -276,3 +278,4 @@ const CreateTest: React.FC = () => {
 };
 
 export default CreateTest;
+

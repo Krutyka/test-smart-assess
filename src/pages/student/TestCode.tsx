@@ -36,19 +36,19 @@ const TestCode: React.FC = () => {
         <div className="w-full max-w-md">
           <h1 className="text-3xl font-bold text-center mb-8">Enter Test Code</h1>
           
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
               value={testCode}
               onChange={(e) => setTestCode(e.target.value)}
-              className="writeEdge-input text-center text-xl uppercase mb-6"
+              className="w-full text-center text-xl uppercase p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-writeEdge-blue"
               autoFocus
               placeholder="Enter code here"
             />
             
             <button
               type="submit"
-              className="writeEdge-btn writeEdge-btn-primary w-full"
+              className="w-full bg-writeEdge-blue hover:bg-blue-700 text-white font-bold py-3 px-4 rounded transition-colors"
             >
               START TEST
             </button>
