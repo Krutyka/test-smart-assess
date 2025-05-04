@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '@/components/Logo';
@@ -53,12 +52,11 @@ const HomePage: React.FC = () => {
                 </Link>
               </div>
             </div>
-            <div className="hidden md:block">
-              <img 
-                src="/lovable-uploads/961765f0-50fb-41c8-ab98-c922b1dece0d.png" 
-                alt="Student working on laptop" 
-                className="rounded-lg shadow-lg"
-              />
+            <div className="hidden md:flex md:items-center md:justify-center">
+              {/* Empty div with dark blue background, replacing the image */}
+              <div className="bg-writeEdge-blue h-full w-full rounded-lg flex items-center justify-center">
+                {/* Optional: You can add some subtle design elements here if needed */}
+              </div>
             </div>
           </div>
         </div>

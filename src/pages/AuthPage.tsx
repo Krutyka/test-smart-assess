@@ -270,14 +270,10 @@ const AuthPage = () => {
         </div>
       </div>
       
-      {/* Right side: Image */}
+      {/* Right side: Dark blue background, replacing the image */}
       <div className="hidden md:block md:w-1/2 bg-writeEdge-blue">
         <div className="h-full flex items-center justify-center p-8">
-          <img 
-            src="/lovable-uploads/a406fde7-ef80-4c18-8660-6421b775dca9.png" 
-            alt="Person typing on laptop" 
-            className="max-w-full max-h-full object-cover rounded-lg shadow-lg"
-          />
+          {/* Empty div with just the background color */}
         </div>
       </div>
     </div>
