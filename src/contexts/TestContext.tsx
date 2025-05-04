@@ -48,7 +48,7 @@ interface TestContextType {
   activeTest: Test | null;
   currentSubmission: TestSubmission | null;
   submissions: TestSubmission[];
-  createTest: (test: Omit<Test, 'id' | 'code'>) => void;
+  createTest: (test: Omit<Test, 'id' | 'code'>) => Test;
   startTest: (testCode: string) => boolean;
   submitTest: (answers: { questionId: string, answer: string }[]) => void;
   getTestResults: (testId: string) => TestSubmission[];
