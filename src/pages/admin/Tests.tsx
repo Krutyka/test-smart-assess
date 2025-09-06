@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { useTest } from '@/contexts/TestContext';
 import { useToast } from '@/hooks/use-toast';
@@ -8,6 +9,24 @@ const AdminTests: React.FC = () => {
   const { tests, getTestResults } = useTest();
   const [activeTestId, setActiveTestId] = useState<string | null>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
+  
+  const handleEditTest = (testId: string) => {
+    // TODO: Implement edit functionality or navigate to edit page
+    toast({
+      title: "Edit Test",
+      description: "Edit functionality will be implemented soon",
+    });
+  };
+  
+  const handleDeleteTest = (testId: string) => {
+    // TODO: Implement delete functionality
+    toast({
+      title: "Delete Test",
+      description: "Delete functionality will be implemented soon",
+      variant: "destructive",
+    });
+  };
   
   const copyTestCode = (code: string) => {
     navigator.clipboard.writeText(code);
@@ -163,10 +182,24 @@ const AdminTests: React.FC = () => {
                     
                     {/* Actions */}
                     <div className="flex justify-end space-x-3 pt-2">
-                      <button className="writeEdge-btn bg-gray-200 text-gray-700 hover:bg-gray-300">
+                      <button 
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEditTest(test.id);
+                        }}
+                        className="writeEdge-btn bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      >
                         Edit Test
                       </button>
-                      <button className="writeEdge-btn bg-red-100 text-red-700 hover:bg-red-200">
+                      <button 
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteTest(test.id);
+                        }}
+                        className="writeEdge-btn bg-red-100 text-red-700 hover:bg-red-200"
+                      >
                         Delete Test
                       </button>
                     </div>
@@ -182,9 +215,9 @@ const AdminTests: React.FC = () => {
             </svg>
             <h2 className="text-xl font-semibold mb-2">No Tests Created Yet</h2>
             <p className="text-gray-600 mb-6">Create your first test to get started</p>
-            <a href="/admin/create-test" className="writeEdge-btn writeEdge-btn-primary">
+            <Link to="/admin/create-test" className="writeEdge-btn writeEdge-btn-primary">
               Create Test
-            </a>
+            </Link>
           </div>
         )}
       </div>

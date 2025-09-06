@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { useTest, Question } from '@/contexts/TestContext';
 import { useToast } from '@/hooks/use-toast';
@@ -124,7 +124,15 @@ const CreateTest: React.FC = () => {
   return (
     <Layout>
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-writeEdge-blue">Create a New Test</h1>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold text-writeEdge-blue">Create a New Test</h1>
+          <Link 
+            to="/admin/tests" 
+            className="writeEdge-btn bg-gray-200 text-gray-700 hover:bg-gray-300"
+          >
+            ← Back to Tests
+          </Link>
+        </div>
         
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Basic Test Information */}
@@ -265,7 +273,8 @@ const CreateTest: React.FC = () => {
           <div className="flex justify-center">
             <button 
               type="submit"
-              className="writeEdge-btn writeEdge-btn-accent px-8"
+              disabled={!testName.trim() || !testDuration || !startTime || !endTime}
+              className="writeEdge-btn writeEdge-btn-accent px-8 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Generate Test Code
             </button>
