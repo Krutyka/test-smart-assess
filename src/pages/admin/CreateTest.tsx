@@ -62,6 +62,9 @@ const CreateTest: React.FC = () => {
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation();
+    
+    console.log('Form submitted with data:', { testName, testDuration, startTime, endTime });
     
     // Validate inputs
     if (!testName.trim()) {
@@ -102,23 +105,32 @@ const CreateTest: React.FC = () => {
       return;
     }
     
-    // Create test with the returned test object
-    const newTest = createTest({
-      name: testName,
-      startTime,
-      endTime,
-      duration: parseInt(testDuration) || 30,
-      questions,
-      createdBy: 'admin',
-    });
-    
-    // Display test code in toast
-    toast({
-      title: "Test Created Successfully",
-      description: `Test code: ${newTest.code}`,
-    });
-    
-    navigate('/admin/tests');
+    try {
+      // Create test with the returned test object
+      const newTest = createTest({
+        name: testName,
+        startTime,
+        endTime,
+        duration: parseInt(testDuration) || 30,
+        questions,
+        createdBy: 'admin',
+      });
+      
+      // Display test code in toast
+      toast({
+        title: "Test Created Successfully",
+        description: `Test code: ${newTest.code}`,
+      });
+      
+      navigate('/admin/tests');
+    } catch (error) {
+      console.error('Error creating test:', error);
+      toast({
+        title: "Error",
+        description: "Failed to create test. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
   
   return (
@@ -148,7 +160,11 @@ const CreateTest: React.FC = () => {
                   type="text"
                   id="testName"
                   value={testName}
-                  onChange={(e) => setTestName(e.target.value)}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    setTestName(e.target.value);
+                  }}
+                  onFocus={(e) => e.stopPropagation()}
                   placeholder="Enter test name"
                   className="writeEdge-input"
                 />
@@ -162,7 +178,12 @@ const CreateTest: React.FC = () => {
                   type="number"
                   id="testDuration"
                   value={testDuration}
-                  onChange={(e) => setTestDuration(e.target.value)}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    setTestDuration(e.target.value);
+                  }}
+                  onFocus={(e) => e.stopPropagation()}
+                  onClick={(e) => e.stopPropagation()}
                   placeholder="e.g. 30"
                   min="1"
                   className="writeEdge-input"
@@ -174,13 +195,18 @@ const CreateTest: React.FC = () => {
                   <label htmlFor="startTime" className="block text-sm font-medium text-gray-700 mb-1">
                     Start Time
                   </label>
-                  <input 
-                    type="datetime-local"
-                    id="startTime"
-                    value={startTime}
-                    onChange={(e) => setStartTime(e.target.value)}
-                    className="writeEdge-input"
-                  />
+                    <input 
+                      type="datetime-local"
+                      id="startTime"
+                      value={startTime}
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        setStartTime(e.target.value);
+                      }}
+                      onFocus={(e) => e.stopPropagation()}
+                      onClick={(e) => e.stopPropagation()}
+                      className="writeEdge-input"
+                    />
                 </div>
                 
                 <div>
@@ -191,7 +217,12 @@ const CreateTest: React.FC = () => {
                     type="datetime-local"
                     id="endTime"
                     value={endTime}
-                    onChange={(e) => setEndTime(e.target.value)}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      setEndTime(e.target.value);
+                    }}
+                    onFocus={(e) => e.stopPropagation()}
+                    onClick={(e) => e.stopPropagation()}
                     className="writeEdge-input"
                   />
                 </div>
@@ -205,7 +236,12 @@ const CreateTest: React.FC = () => {
                   type="number"
                   id="numberOfQuestions"
                   value={numberOfQuestions}
-                  onChange={(e) => handleNumberOfQuestionsChange(e.target.value)}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    handleNumberOfQuestionsChange(e.target.value);
+                  }}
+                  onFocus={(e) => e.stopPropagation()}
+                  onClick={(e) => e.stopPropagation()}
                   min="1"
                   max="10"
                   className="writeEdge-input"

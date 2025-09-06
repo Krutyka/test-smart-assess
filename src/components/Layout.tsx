@@ -136,7 +136,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             isActive={path === '/settings'}
           />
           <button 
-            onClick={logout}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              logout();
+            }}
             className="flex items-center space-x-4 p-4 w-full text-white hover:text-writeEdge-gold"
           >
             <div className="w-6 h-6">
@@ -147,7 +151,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <span className="text-lg">Log Out</span>
           </button>
           <button 
-            onClick={() => navigate('/help')}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              navigate('/help');
+            }}
             className="flex items-center space-x-4 p-4 w-full text-white hover:text-writeEdge-gold"
           >
             <div className="w-6 h-6">
@@ -175,7 +183,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <Link to="/modules" className="text-white hover:text-writeEdge-gold">MODULES</Link>
             )}
             <button 
-              onClick={logout}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                logout();
+              }}
               className="text-white hover:text-writeEdge-gold"
             >
               LOG OUT
